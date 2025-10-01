@@ -1,0 +1,51 @@
+### model
+model_name_or_path: Qwen/Qwen2.5-Math-7B
+trust_remote_code: true
+### flow config
+add_flowhook: true
+num_layers_flow: 6
+hook_layers_percentile: "0.25+0.5+0.75"
+flow_context_mode: token_pre
+flow_batch_mul: 2
+
+### method
+stage: sft
+do_train: true
+finetuning_type: full
+freeze_llm: true
+deepspeed: examples/deepspeed/ds_z3_config.json  # choices: [ds_z0_config.json, ds_z2_config.json, ds_z3_config.json]
+flash_attn: fa2
+
+### dataset
+dataset: openr1_math_default
+dataset_dir: dataset/LM_data/Reasoning_data
+template: qwen
+cutoff_len: 8192
+overwrite_cache: true
+preprocessing_num_workers: 32
+dataloader_num_workers: 4
+
+### output
+output_dir: /.../Qwen2.5-7B-FlowEnv
+logging_steps: 1
+save_strategy: epoch # epoch, steps
+plot_loss: true
+overwrite_output_dir: true
+save_only_model: true
+
+### train
+per_device_train_batch_size: 2
+gradient_accumulation_steps: 16
+learning_rate: 1.0e-4
+num_train_epochs: 2.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+weight_decay: 0.01
+ddp_timeout: 180000000
+resume_from_checkpoint: null
+report_to: tensorboard
+gradient_checkpointing: true
+log_customized_metrics: true
+save_safetensors: false
+print_param_status: false # debug use

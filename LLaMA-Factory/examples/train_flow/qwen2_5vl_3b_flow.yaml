@@ -1,0 +1,61 @@
+### model
+model_name_or_path: Qwen/Qwen2.5-VL-3B-Instruct
+image_max_pixels: 262144
+video_max_pixels: 16384
+trust_remote_code: true
+### flow config
+add_flowhook: true
+num_layers_flow: 4
+hook_layers_percentile: "0.25+0.5+0.75"
+flow_context_mode: token_pre
+flow_batch_mul: 4
+# cache_dir: ...
+
+### method
+stage: sft
+do_train: true
+finetuning_type: full
+# pure_bf16: true
+freeze_vision_tower: true  # choices: [true, false]
+freeze_multi_modal_projector: true  # choices: [true, false]
+freeze_language_model: true  # choices: [true, false]
+deepspeed: examples/deepspeed/ds_z3_config.json  # choices: [ds_z0_config.json, ds_z2_config.json, ds_z3_config.json]
+
+### dataset
+dataset: MMPRv1.1_Math
+dataset_dir: dataset/LVM_data/Processed_data/Reasoning_data/MMPR-v1.1/factory_category
+media_dir: dataset/LVM_data/Processed_data/Reasoning_data
+template: qwen2_vl
+cutoff_len: 16384
+mix_strategy: concat
+# max_samples: 1000  # debug use
+overwrite_cache: true
+preprocessing_num_workers: 16
+dataloader_num_workers: 4
+
+### output
+output_dir: /.../Qwen2.5VL-3B-FlowEnv
+logging_steps: 1
+# save_steps: 1000
+save_strategy: epoch
+plot_loss: true
+overwrite_output_dir: true
+save_only_model: true
+
+### train
+per_device_train_batch_size: 4
+gradient_accumulation_steps: 8
+learning_rate: 1.0e-4
+num_train_epochs: 2.0
+# max_steps: 5000
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+weight_decay: 0.01
+ddp_timeout: 180000000
+resume_from_checkpoint: null
+report_to: tensorboard
+gradient_checkpointing: true
+log_customized_metrics: true
+save_safetensors: false
+print_param_status: false # debug use
