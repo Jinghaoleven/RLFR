@@ -2,13 +2,20 @@ import torch
 import torch.nn as nn
 from torch.utils.checkpoint import checkpoint
 import math
+from typing import Optional, List
 from diffusers.models.embeddings import TimestepEmbedding, Timesteps
+from diffusers.models.modeling_utils import ModelMixin
+from diffusers.configuration_utils import ConfigMixin, register_to_config
 from torch.nn import functional as F
+import deepspeed
+from transformers.utils import cached_file
+from typing import Any, Callable, Dict, List, Optional, Set, Tuple, Type, TypeVar, Union
+import os
 
 
 class FlowReward(nn.Module):
     """Velocity Deviation"""
-    def __init__(self, target_channels, cond_channels, depth, width, eps=1e-6, grad_checkpointing=False):
+    def __init__(self, target_channels, cond_channels, depth, width, rewarding_timesteps="0.8", eps=1e-6, grad_checkpointing=False):
         super(FlowReward, self).__init__()
         
         model_fn = SimpleMLPAdaLNTimePos
@@ -21,28 +28,44 @@ class FlowReward(nn.Module):
             eps=eps,
             grad_checkpointing=grad_checkpointing,
         )
+        self.inference_timesteps = [float(timestep) for timestep in rewarding_timesteps.split("+")]
+        self.debias_weight = [timestep / (1 - timestep) for timestep in self.inference_timesteps]
 
-    def forward(self, target, cond, mask=None, layer=None):
+    def forward(self, target, cond, layer=None):
         """
         shape: (bsz*seq_len*diff_mul, dim)
         """
         noise = torch.randn_like(target)
 
-        # sample t from logit-normal distribution
-        u = torch.normal(mean=0.0, std=1.0, size=(len(target),))
-        t = (1 / (1 + torch.exp(-u))).to(target)
+        timestep_losses = []
+        for idx, t_step in enumerate(self.inference_timesteps):
+            t = torch.full((len(target),), t_step, device=target.device) 
 
-        # linear interpolation between target and noise
-        xt, ut = expand_t(t, target) * target + (1 - expand_t(t, target)) * noise, target - noise
-        layer_idx = None
-        if layer is not None:
-            layer_idx = torch.ones(size=(len(target),), device=target.device) * layer
-        
-        model_output = self.model(xt, t, cond, layer_idx)
-        loss = (model_output.float() - ut.float()) ** 2
-        loss = torch.mean(loss, dim=list(range(1, len(loss.size()))))  # Take the mean over all non-batch dimensions.
-        loss = (loss * mask).sum() / (mask.sum() + 1e-8) if mask is not None else loss.mean()
-        return loss
+            # linear interpolation between target and noise
+            xt, ut = expand_t(t, target) * target + (1 - expand_t(t, target)) * noise, target - noise
+            layer_id = torch.ones(size=(len(target),), device=target.device) * layer
+            
+            model_output = self.model(xt, t, cond, layer_id)
+            loss = (model_output.float() - ut.float()) ** 2
+            loss = torch.mean(loss, dim=list(range(1, len(loss.size()))))  # Take the mean over all non-batch dimensions.
+            timestep_losses.append(loss)
+            
+        timestep_scores = [self.debias_weight[idx] * loss for loss in timestep_losses]
+        loss = sum(timestep_losses)/len(timestep_losses)
+        score = sum(timestep_scores)/len(timestep_scores)
+        return loss, score
+    
+    def save_pretrained(
+        self,
+        save_directory: Union[str, os.PathLike],
+        state_dict: Optional[dict] = None,
+        **kwargs,
+    ):  
+        if state_dict is None:
+            state_dict = self.model.state_dict()
+
+        save_path = os.path.join(save_directory,"flow_model.bin")
+        torch.save(state_dict, save_path)
 
 
 #################################################################
@@ -60,7 +83,6 @@ def expand_t(t, x):
     dims = [1] * (len(x.size()) - 1)
     t = t.view(t.size(0), *dims)
     return t
-
 
 def randn_tensor(shape, noise_repeat, device, dtype=torch.float32):
     bsz = shape[0]
@@ -183,6 +205,7 @@ class FinalLayer(nn.Module):
         x = modulate(self.norm_final(x), shift, scale)
         x = self.linear(x)
         return x
+
 
 
 #################################################################

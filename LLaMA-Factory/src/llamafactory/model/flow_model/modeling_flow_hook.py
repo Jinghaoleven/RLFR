@@ -131,30 +131,29 @@ class AutoModelForCausalLMWithFlowHook(PreTrainedModelWrapper):
 
     def prepare_input_for_matching(self, hidden_states, mask, flow_context_mode, shift, layer_idx):
         if flow_context_mode== "token_pre":
-            response_hidden_states = hidden_states[:,shift:,:]
+            context_hidden_states = hidden_states[:,shift:,:]
             target = hidden_states[:,:-shift,:]
             mask = mask[:,:-shift]
             layer_idx = self.hook_layers[layer_idx] / self.num_hidden_layers
         elif flow_context_mode== "token_post":
-            response_hidden_states = hidden_states[:,:-shift,:]
+            context_hidden_states = hidden_states[:,:-shift,:]
             target = hidden_states[:,shift:,:]
             mask = mask[:,shift:]
             layer_idx = self.hook_layers[layer_idx] / self.num_hidden_layers
         elif flow_context_mode == "identity":
-            response_hidden_states = hidden_states
-            target = hidden_states
+            context_hidden_states = target = hidden_states
             mask = mask
             layer_idx = self.hook_layers[layer_idx] / self.num_hidden_layers
-        return response_hidden_states, target, mask, layer_idx
+        return context_hidden_states, target, mask, layer_idx
         
     
     def forward_hook(self, module, input, output, idx):
         hidden_states = output[0]
         flow_loss = 0
-        # flow_context_mode correspond to flow_shift and reflect the behavior in single hook_post
+        # flow_context_mode correspond to flow_shift and reflect the behavior in single hook
         for shift_idx, flow_context_mode in zip(self.flow_shift, self.flow_context_modes):
-            response_hidden_states, target, mask, layer_idx = self.prepare_input_for_matching(hidden_states, self.mask, flow_context_mode, shift_idx, idx)
-            flow_loss += self.context_weight * self.flow_matching(cxt=response_hidden_states, target=target.detach(), mask=mask, layer=layer_idx)
+            context_hidden_states, target, mask, layer_idx = self.prepare_input_for_matching(hidden_states, self.mask, flow_context_mode, shift_idx, idx)
+            flow_loss += self.context_weight * self.flow_matching(cxt=context_hidden_states, target=target.detach(), mask=mask, layer=layer_idx)
         self.flow_losses.append(flow_loss)
         return output
 

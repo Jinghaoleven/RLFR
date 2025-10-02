@@ -1,0 +1,6 @@
+{
+  "num_layers_flow": 4,
+  "hook_layers_percentile": "0.25+0.5+0.75",
+  "flow_context_mode": "token_post",
+  "flow_shift": "1"
+}
