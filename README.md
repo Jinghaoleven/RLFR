@@ -16,3 +16,10 @@ Please leave us a star ⭐ if you find this work helpful.
 
 
 ![pref_grpo_pipeline](/assets/pref_grpo_pipeline.png)
+
+## 🔧 Environment Set Up
+1. Clone this repository and navigate to the folder:
+```bash
+git clone https://github.com/JingHao99/RLFR.git
+cd RLFR
+```
