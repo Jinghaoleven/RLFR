@@ -4,10 +4,10 @@
 # =========================================================
 
 # Base paths - MODIFY THESE
-WORKSPACE_DIR="$(pwd)"    # Path to project root directory
+WORKSPACE_DIR=./openrlhf    # Path to project root directory
 
 # Experiment Setting
-DATASET_PATH=./dataset/rltrain/MM-Eureka/dataset_prompt_sys.jsonl   # Path to your dataset
+DATASET_PATH=./dataset/rltrain/MM-Eureka/dataset_prompt.jsonl   # Path to your dataset
 MEDIA_PATH=./dataset/rltrain/MM-Eureka
 
 PRETRAIN_MODEL_PATH=Qwen/Qwen2.5-VL-7B-Instruct   # Path to pretrained model

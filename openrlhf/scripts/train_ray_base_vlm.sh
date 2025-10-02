@@ -4,16 +4,19 @@
 # =========================================================
 
 # Base paths - MODIFY THESE
-export WORKSPACE_DIR="$(pwd)"   # Path to project root directory
+WORKSPACE_DIR=./openrlhf   # Path to project root directory
 
 # Experiment Setting
-DATASET_PATH=./dataset/rltrain/MM-Eureka/dataset_prompt_sys.jsonl   # Path to your dataset
+DATASET_PATH=./dataset/rltrain/MM-Eureka/dataset_prompt.jsonl   # Path to your dataset
 MEDIA_PATH=./dataset/rltrain/MM-Eureka
 PRETRAIN_MODEL_PATH=Qwen/Qwen2.5-VL-7B-Instruct   # Path to pretrained model
 SAVE_PATH=./result/Qwen2_5VL-7B/RL       # Path to save checkpoints
+LOG_PATH=./log_dir
 
 # Model configuration
-export RUN_NAME="Qwen2.5-VL-7B-Instruct-Base-GRPO"              # Name for this training run
+PROJECT_NAME="Qwen2.5-VL-7B-Instruct"              # Name for this training run
+EXP_NAME="Base-GRPO" 
+RUN_NAME=$PROJECT_NAME/$EXP_NAME
 cd $WORKSPACE_DIR
 # =================== Script Execution ===================
 # You shouldn't need to modify anything below this line
@@ -22,9 +25,9 @@ cd $WORKSPACE_DIR
 # Get script PID and setup directories
 SCRIPT_PID=$$
 export TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-export LOG_DIR=$SAVE_PATH/$RUN_NAME/logs
-export CUR_LOG_DIR=$LOG_DIR/$TIMESTAMP
-export REWARD_LOG_PATH=$LOG_DIR/reward.log
+export LOG_DIR=$LOG_PATH/$PROJECT_NAME             # tensorboard log
+export CUR_LOG_DIR=$LOG_DIR/$EXP_NAME/$TIMESTAMP   # local log
+export REWARD_LOG_PATH=$LOG_DIR/$EXP_NAME/reward.log
 
 # Stop any existing ray processes
 ray stop

@@ -23,8 +23,8 @@ deepspeed: examples/deepspeed/ds_z3_config.json  # choices: [ds_z0_config.json, 
 
 ### dataset
 dataset: MMPRv1.1_Math
-dataset_dir: dataset/LVM_data/Processed_data/Reasoning_data/MMPR-v1.1/factory_category
-media_dir: dataset/LVM_data/Processed_data/Reasoning_data
+dataset_dir: ./dataset/offtrain/MMPR-v1.1
+media_dir: ./dataset/offtrain
 template: qwen2_vl
 cutoff_len: 16384
 mix_strategy: concat
@@ -34,7 +34,7 @@ preprocessing_num_workers: 16
 dataloader_num_workers: 4
 
 ### output
-output_dir: /.../Qwen2.5VL-7B-FlowEnv
+output_dir: ./result/Qwen2_5VL-7B/flow_model
 logging_steps: 1
 # save_steps: 1000
 save_strategy: epoch

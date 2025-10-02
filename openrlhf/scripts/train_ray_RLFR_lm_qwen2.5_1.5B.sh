@@ -4,7 +4,7 @@
 # =========================================================
 
 # Base paths - MODIFY THESE
-WORKSPACE_DIR="$(pwd)"   # Path to project root directory
+WORKSPACE_DIR=./openrlhf   # Path to project root directory
 
 # Experiment Setting
 DATASET_PATH=./dataset/rltrain/math_lvl3to5_8k   # Path to your dataset
