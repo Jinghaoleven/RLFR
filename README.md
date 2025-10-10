@@ -14,8 +14,6 @@
 ## 📜 Brief Introduction
 We introduce the RLFR that offering a novel perspective on shaping RLVR with flow rewards derived from latent space, and thus extending RLVR with latent rewards utilization. Our approach highlight the much underexplored yet highly expressive latent space and the sound flow environment.
 
-<!-- 💡 **Stronger Reasoning Enhancement.** RLPR achieves better reasoning capability enchancement on both mathematical and general-domain reasoning benchmarks, even surpassing strong methods using verifier models. -->
-
 💡 **Stronger Reasoning Enhancement.** RLFR shows consistent progress in advancing reasoning capabilities over RLVR with binary verification and entropy based shaping method with signal collected from logit space.
 <div align="center"> <img src="assets/performance-RLFR.png" width = 80% /> </div>
 
@@ -23,8 +21,8 @@ We introduce the RLFR that offering a novel perspective on shaping RLVR with flo
 <div align="center"> <img src="assets/RLFR.png" width = 80% /> </div>
 
 📈 **Reward Behavior Analysis.** Flow rewards enable *expert off-policy data as reference* for constituting reward signal.
-Beyond that, flow rewards *prefer tokens that practically execute the question*, rather than connection token, which is different from entropy perspective. Additionally, flow rewards rely on *efficient context dependence that natively compressed in the latent space* rather than individual denotation in the token space for context comprehending. Please refer to our paper for further details.
-<!-- <div align="center"> <img src="assets/behavior2.png" width = 80% /> </div> -->
+Beyond that, flow rewards *prefer tokens that practically execute the question*, rather than connection token, which is different from entropy perspective. Additionally, flow rewards rely on *efficient context dependence that natively compressed in the latent space* rather than individual denotation in the token space for context comprehending. Please refer to our paper for more details.
+<div align="center"> <img src="assets/behavior.png" width = 80% /> </div>
 
 ## 🔧 Environment Set Up
 1. Clone this repository and navigate to the folder:
