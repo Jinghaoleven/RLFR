@@ -19,12 +19,12 @@ finetuning_type: full
 freeze_vision_tower: true  # choices: [true, false]
 freeze_multi_modal_projector: true  # choices: [true, false]
 freeze_language_model: true  # choices: [true, false]
-deepspeed: examples/deepspeed/ds_z3_config.json  # choices: [ds_z0_config.json, ds_z2_config.json, ds_z3_config.json]
+deepspeed: LLaMA-Factory/examples/deepspeed/ds_z3_config.json  # choices: [ds_z0_config.json, ds_z2_config.json, ds_z3_config.json]
 
 ### dataset
 dataset: MMPRv1.1_Math
-dataset_dir: ./dataset/offtrain/MMPR-v1.1
-media_dir: ./dataset/offtrain
+dataset_dir: datasets/RLFR-Dataset-VLM
+media_dir: datasets/RLFR-Dataset-VLM
 template: qwen2_vl
 cutoff_len: 16384
 mix_strategy: concat
@@ -34,7 +34,7 @@ preprocessing_num_workers: 16
 dataloader_num_workers: 4
 
 ### output
-output_dir: ./result/Qwen2_5VL-7B/flow_model
+output_dir: result/Qwen2_5VL-7B/flow_model
 logging_steps: 1
 # save_steps: 1000
 save_strategy: epoch

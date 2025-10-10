@@ -13,12 +13,12 @@ stage: sft
 do_train: true
 finetuning_type: full
 freeze_llm: true
-deepspeed: examples/deepspeed/ds_z3_config.json  # choices: [ds_z0_config.json, ds_z2_config.json, ds_z3_config.json]
+deepspeed: LLaMA-Factory/examples/deepspeed/ds_z3_config.json  # choices: [ds_z0_config.json, ds_z2_config.json, ds_z3_config.json]
 flash_attn: fa2
 
 ### dataset
 dataset: openr1_math_default
-dataset_dir: ./dataset/offtrain
+dataset_dir: datasets/RLFR-Dataset-LM
 template: llama3
 cutoff_len: 8192
 overwrite_cache: true
@@ -26,7 +26,7 @@ preprocessing_num_workers: 32
 dataloader_num_workers: 4
 
 ### output
-output_dir: ./result/llama-3.1-8B/flow_model
+output_dir: result/llama-3.1-8B/flow_model
 logging_steps: 1
 save_strategy: epoch # epoch, steps
 plot_loss: true

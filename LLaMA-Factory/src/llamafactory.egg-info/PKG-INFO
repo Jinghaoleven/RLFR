@@ -22,8 +22,8 @@ Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
 Requires-Python: >=3.9.0
 Description-Content-Type: text/markdown
 License-File: LICENSE
-Requires-Dist: transformers!=4.46.*,!=4.47.*,!=4.48.*,<=4.49.0,>=4.41.2; python_version < "3.10"
-Requires-Dist: transformers!=4.46.*,!=4.47.*,!=4.48.0,<=4.49.0,>=4.41.2; python_version >= "3.10"
+Requires-Dist: transformers!=4.52.0,<=4.56.2,>=4.49.0; python_version < "3.10"
+Requires-Dist: transformers!=4.52.0,<=4.57.0,>=4.49.0; python_version >= "3.10"
 Requires-Dist: datasets<=3.3.2,>=2.16.0
 Requires-Dist: accelerate<=1.4.0,>=0.34.0
 Requires-Dist: peft<=0.12.0,>=0.11.1

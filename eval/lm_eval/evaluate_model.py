@@ -99,7 +99,7 @@ def main(
     eval_type: str = "avg@k",
     max_test: int = 999999,
     save: bool = False,
-    save_path: str = None,
+    save_path: str = "eval_result",
 ):
     available_gpus = os.environ['CUDA_VISIBLE_DEVICES'].split(',')
     print(f"available_gpus: {available_gpus}")
@@ -251,7 +251,7 @@ def main(
     print("formatted:", formatted)
 
     if save:
-        fn = os.path.join(save_path,model_name.split("/")[-1])
+        fn = os.path.join(save_path,model_name.split("/")[-4])
         fn = f"{fn}_template_{template}_temp{temperature}_topp{top_p}_n{n_samples}.json"
         print(f"saving model outputs at {fn}")
         json.dump(

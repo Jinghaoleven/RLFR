@@ -4,20 +4,22 @@
 # =========================================================
 
 # Base paths - MODIFY THESE
-WORKSPACE_DIR=./openrlhf   # Path to project root directory
+export PROJECT_ROOT="$(pwd)"   # Path to project root directory
+export WORKING_DIR=$PROJECT_ROOT/openrlhf
+cd "$WORKING_DIR"
 
 # Experiment Setting
-DATASET_PATH=./dataset/rltrain/MM-Eureka/dataset_prompt.jsonl   # Path to your dataset
-MEDIA_PATH=./dataset/rltrain/MM-Eureka
+DATASET_PATH=$PROJECT_ROOT/datasets/RLFR-Dataset-VLM/mmeureka_prompt.jsonl   # Path to your dataset
+MEDIA_PATH=$PROJECT_ROOT/datasets/RLFR-Dataset-VLM
+
 PRETRAIN_MODEL_PATH=Qwen/Qwen2.5-VL-7B-Instruct   # Path to pretrained model
-SAVE_PATH=./result/Qwen2_5VL-7B/RL       # Path to save checkpoints
-LOG_PATH=./log_dir
+SAVE_PATH=$PROJECT_ROOT/result/Qwen2_5VL-7B/RL       # Path to save checkpoints
+LOG_PATH=$PROJECT_ROOT/log_dir
 
 # Model configuration
 PROJECT_NAME="Qwen2.5-VL-7B-Instruct"              # Name for this training run
 EXP_NAME="Base-GRPO" 
 RUN_NAME=$PROJECT_NAME/$EXP_NAME
-cd $WORKSPACE_DIR
 # =================== Script Execution ===================
 # You shouldn't need to modify anything below this line
 # ======================================================
@@ -58,7 +60,7 @@ ray start --head --node-ip-address 0.0.0.0 --num-gpus 4 --temp-dir ~/.cache/ray
 # Start training
 echo "Starting training..."
 ray job submit --address="http://127.0.0.1:8265" \
-   --runtime-env-json="{\"working_dir\": \"$WORKSPACE_DIR\"}" \
+   --runtime-env-json="{\"working_dir\": \"$WORKING_DIR\"}" \
    -- python -m openrlhf.cli.train_ppo_ray \
    --ref_num_nodes 1 \
    --ref_num_gpus_per_node 4 \

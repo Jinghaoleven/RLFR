@@ -4,15 +4,18 @@
 # =========================================================
 
 # Base paths - MODIFY THESE
-WORKSPACE_DIR=./openrlhf   # Path to project root directory
+export PROJECT_ROOT="$(pwd)"   # Path to project root directory
+export WORKING_DIR=$PROJECT_ROOT/openrlhf
+cd "$WORKING_DIR"
 
 # Experiment Setting
-DATASET_PATH=./dataset/rltrain/math_lvl3to5_8k   # Path to your dataset
+DATASET_PATH=$PROJECT_ROOT/datasets/RLFR-Dataset-LM/math-lvl3to5-8k   # Path to your dataset
 PRETRAIN_MODEL_PATH=meta-llama/Llama-3.1-8B  # Path to pretrained model
-PRETRAINED_FLOW=./result/llama-3.1-8B/flow_model
-FLOW_CONFIG=./config/flow_config_7B.json
-SAVE_PATH=./result/Llama-3.1-8B/RL         # Path to save checkpoints
-LOG_PATH=./log_dir
+PRETRAINED_FLOW=$PROJECT_ROOT/result/llama-3.1-8B/flow_model/checkpoint-***
+FLOW_CONFIG=$PROJECT_ROOT/config/flow_config_7B.json
+
+SAVE_PATH=$PROJECT_ROOT/result/Llama-3.1-8B/RL         # Path to save checkpoints
+LOG_PATH=$PROJECT_ROOT/log_dir
 export NODE_RANK=0
 export MASTER_ADDR="127.0.0.1"
 
@@ -20,7 +23,6 @@ export MASTER_ADDR="127.0.0.1"
 PROJECT_NAME="Llama-3.1-8B-math_lvl3to5_8k"
 EXP_NAME="RLFR-GRPO"              # Name for this training run
 RUN_NAME=$PROJECT_NAME/$EXP_NAME
-cd $WORKSPACE_DIR
 # =================== Script Execution ===================
 # You shouldn't need to modify anything below this line
 # ======================================================
@@ -76,7 +78,7 @@ ray start --head --node-ip-address 0.0.0.0 --num-gpus 4 --temp-dir ~/.cache/ray
 # Start training
 echo "Starting training..."
 ray job submit --address="http://127.0.0.1:8265" \
-   --runtime-env-json="{\"working_dir\": \"$WORKSPACE_DIR\"}" \
+   --runtime-env-json="{\"working_dir\": \"$WORKING_DIR\"}" \
    -- python -m openrlhf.cli.train_ppo_ray \
    --ref_num_nodes 1 \
    --ref_num_gpus_per_node 4 \

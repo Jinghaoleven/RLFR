@@ -24,10 +24,10 @@ librosa
 tyro<0.9.0
 
 [:python_version < "3.10"]
-transformers!=4.46.*,!=4.47.*,!=4.48.*,<=4.49.0,>=4.41.2
+transformers!=4.52.0,<=4.56.2,>=4.49.0
 
 [:python_version >= "3.10"]
-transformers!=4.46.*,!=4.47.*,!=4.48.0,<=4.49.0,>=4.41.2
+transformers!=4.52.0,<=4.57.0,>=4.49.0
 
 [adam-mini]
 adam-mini

@@ -215,7 +215,7 @@ class AutoModelForCausalLMWithFlowHook(PreTrainedModelWrapper):
 
         metrics = {}
         metrics["losses/ntp"] = base_model_output.loss.detach().cpu().item()
-        metrics["losses/matching"] = flow_losses.detach().cpu().item()
+        metrics["losses/flow"] = flow_losses.detach().cpu().item()
 
         return (flow_losses, base_model_output.logits, metrics)
 
