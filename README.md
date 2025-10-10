@@ -17,7 +17,7 @@ We introduce the RLFR that offering a novel perspective on shaping RLVR with flo
 💡 **Stronger Reasoning Enhancement.** RLFR shows consistent progress in advancing reasoning capabilities over RLVR with binary verification and entropy based shaping method with signal collected from logit space.
 <div align="center"> <img src="assets/performance-RLFR.png" width = 80% /> </div>
 
-🛠️ **Simple and Reliable Reward.** RLFR constructs flow fields of policy latents from either off-policy high-quality data and on-policy rejection sampling data, and the velocity deviations of policy latents within it are quantified to serve as a reward signal.
+🛠️ **Simple and Reliable Reward.** RLFR establishes the flow fields of policy latents from either off-policy high-quality data and on-policy rejection sampling data, and the velocity deviations of policy latents within it are quantified to serve as a reward signal.
 <div align="center"> <img src="assets/RLFR.png" width = 80% /> </div>
 
 📈 **Reward Behavior Analysis.** Flow rewards enable *expert off-policy data as reference* for constituting reward signal.
