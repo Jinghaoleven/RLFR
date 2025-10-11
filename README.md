@@ -21,7 +21,7 @@ We introduce the RLFR that offering a novel perspective on shaping RLVR with flo
 <div align="center"> <img src="assets/RLFR.png" width = 80% /> </div>
 
 📈 **Reward Behavior Analysis.** Flow rewards enable *expert off-policy data as reference* for constituting reward signal.
-Beyond that, flow rewards *prefer tokens that practically execute the question*, rather than connection token, which is different from entropy perspective. Additionally, flow rewards rely on *efficient context dependence that natively compressed in the latent space* rather than individual denotation in the token space for context comprehending. Please refer to our paper for more details.
+Beyond that, flow rewards *prefer tokens that practically execute the question*, rather than connection token, which is different from entropy perspective. Additionally, flow reward is capable of relying on *efficient context dependence compressed within the hidden states*, rather than individual token-level denotation for context comprehending. Please refer to our paper for more details.
 <div align="center"> <img src="assets/behavior.png" width = 80% /> </div>
 
 ## 🔧 Environment Set Up
