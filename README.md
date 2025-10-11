@@ -2,14 +2,14 @@
 <h1 align="center"> RLFR: Extending Reinforcement Learning for LLMs with Flow Environment</h1>
 
 <a href='https://arxiv.org/abs/2506.18254'><img src='https://img.shields.io/badge/arXiv-RLFR-purple'></a>
-<a href='https://codegoat24.github.io/UnifiedReward/Pref-GRPO'><img src='https://img.shields.io/badge/Project-Website-orange'></a>
-[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20huggingface%20-Model-brown)](https://huggingface.co/collections/openbmb/rlpr-6857fa5d22cbe64327a3f8f6)
-<a href='https://huggingface.co/datasets/openbmb/RLPR-Train-Dataset'><img src='https://img.shields.io/badge/Dataset-Train-Green'></a>
+<a href='https://jinghaoleven.github.io/RLFR/'><img src='https://img.shields.io/badge/Project-Website-orange'></a>
+[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20huggingface%20-Model-brown)](https://huggingface.co/collections/JingHaoZ/rlfr-68e9046eaeb8207e868a4f02)
+<a href='https://huggingface.co/collections/JingHaoZ/rlfr-68e9046eaeb8207e868a4f02'><img src='https://img.shields.io/badge/Dataset-Train-Green'></a>
 
 </div>
 
 ## 🔥 News
-- [2025.10.10] 🔥🔥 We release the [paper](https://github.com/JingHao99/RLFR), [models](https://github.com/JingHao99/RLFR), [dataset](https://github.com/JingHao99/RLFR), and codebase of RLFR.
+- [2025.10.10] 🔥🔥 We release the [paper](https://github.com/JingHao99/RLFR), [models](https://huggingface.co/collections/JingHaoZ/rlfr-68e9046eaeb8207e868a4f02), [dataset](https://huggingface.co/collections/JingHaoZ/rlfr-68e9046eaeb8207e868a4f02), and codebase of RLFR.
 
 ## 📜 Brief Introduction
 We introduce the RLFR that offering a novel perspective on shaping RLVR with flow rewards derived from latent space, and thus extending RLVR with latent rewards utilization. Our approach highlight the much underexplored yet highly expressive latent space and the sound flow environment.
