@@ -96,3 +96,14 @@ This work is supported by [SII](https://www.sii.edu.cn/main.htm) for computing r
 We acknowledge the outstanding open-source contributions from [OpenRLHF](https://github.com/OpenRLHF/OpenRLHF), [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory/tree/main) for building our training codebase, and [VLMEvalKit](https://github.com/open-compass/VLMEvalKit), [Understand-R1-Zero](https://github.com/sail-sg/understand-r1-zero/tree/main) for developing our evaluation pipeline.
 
 Thanks to all the contributors!
+
+## ⭐ Citation
+Please leave us a star ⭐ if you find this work helpful, and consider cite our paper!
+```
+@article{zhang2025rlfr,
+  title={RLFR: Extending Reinforcement Learning for LLMs with Flow Environment},
+  author={Zhang, Jinghao and Zheng, Naishan and Li, Ruilin and Cheng, Dongzhou and Liang, Zheming and Zhao, Feng and Wang, Jiaqi},
+  journal={arXiv preprint arXiv:2510.10201},
+  year={2025}
+}
+```
