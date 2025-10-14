@@ -27,7 +27,7 @@ Beyond that, flow rewards *prefer tokens that practically execute the question*,
 ## 🔧 Environment Set Up
 1. Clone this repository and navigate to the folder:
 ```bash
-git clone https://github.com/JingHao99/RLFR.git
+git clone https://github.com/Jinghaoleven/RLFR.git
 cd RLFR
 ```
 2. Install dependency:
