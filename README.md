@@ -9,7 +9,7 @@
 </div>
 
 ## 🔥 News
-- [2025.10.10] 🔥🔥 We release the [paper](https://arxiv.org/pdf/2510.10201), [models](https://huggingface.co/collections/JingHaoZ/rlfr-68e9046eaeb8207e868a4f02), [dataset](https://huggingface.co/collections/JingHaoZ/rlfr-68e9046eaeb8207e868a4f02), and codebase of RLFR.
+- [2025.10.11] 🔥🔥 We release the [paper](https://arxiv.org/pdf/2510.10201), [models](https://huggingface.co/collections/JingHaoZ/rlfr-68e9046eaeb8207e868a4f02), [dataset](https://huggingface.co/collections/JingHaoZ/rlfr-68e9046eaeb8207e868a4f02), and codebase of RLFR.
 
 ## 📜 Brief Introduction
 We introduce the RLFR that offering a novel perspective on shaping RLVR with flow rewards derived from latent space, and thus extending RLVR with latent rewards utilization. Our approach highlight the much underexplored yet highly expressive latent space and the sound flow environment.
