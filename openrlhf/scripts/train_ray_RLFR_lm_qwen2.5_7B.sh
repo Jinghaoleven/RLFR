@@ -117,7 +117,7 @@ ray job submit --address="http://127.0.0.1:8265" \
    --flow_coef 0.01 \
    --flow_score_threshold 0.6 \
    --flow_score_topk 15 \
-   --pretrained_flow_model $PRETRAIN_MODEL_PATH \
+   --pretrained_flow_model $PRETRAINED_FLOW \
    --flow_config $FLOW_CONFIG \
    --save_flow \
    --flow_reward_norm "minmax"\
